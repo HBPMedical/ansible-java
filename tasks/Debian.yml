@@ -3,11 +3,11 @@
   when: ansible_lsb.id == 'Ubuntu' and use_openjdk_ppa
 
 - name: Install os packages
-  apt: 
+  apt:
     pkg: "{{item}}"
-    state: present 
+    state: present
     update_cache: yes
-  with_items: 
+  with_items:
     - openjdk-{{java_version}}-jre-headless
     - openjdk-{{java_version}}-jdk
 
@@ -18,7 +18,7 @@
 
 # Here we get back to ansible land...
 - name: Check for libjvm_path_resolved
-  stat: 
+  stat:
     path: "{{libjvm_path_resolved.stdout}}"
   register: libjvm
 
@@ -27,10 +27,11 @@
   when: libjvm.stat.exists == true
 
 - name: Check if symlink created
-  stat: 
+  stat:
     path: "{{java_libjvm_symlink_path}}"
   register: libjvm_symlink
 
-- fail: 
+- name: Fail if libjvm symlink has not been created
+  fail:
     msg: "Could not create libjvm symlink {{java_libjvm_symlink_path}}"
   when: libjvm_symlink.stat.exists == False

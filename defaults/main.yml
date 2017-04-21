@@ -1,5 +1,8 @@
 ---
-java_version: "7"
+java_version: "8"
 java_register_alternative: false
 java_register_env: false
 use_openjdk_ppa: false
+
+# path to lib_role
+openjdk_path_to_lib_role: "{{ lib_roles_path|default(playbook_dir + '/roles') }}"
