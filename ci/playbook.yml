@@ -18,3 +18,4 @@
 # Only run if not travis
 - include: tests.yml
   when: travis == "false"
+
