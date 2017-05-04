@@ -24,6 +24,7 @@
 - name: Define java_home
   set_fact:
     java_home: "{{ java_home_path.stdout | replace('/jre/bin/java','') }}"
+    java_home_fact: "{{ java_home_path.stdout | replace('/jre/bin/java','') }}"
   when: java_register_env
 
 - name: Register JAVA_HOME env variable
@@ -36,7 +37,7 @@
   include: "{{ openjdk_path_to_lib_role }}/silpion.lib/tasks/localfacts.yml"
   vars:
     namespace: java
-    java_home: "/usr/lib/jvm/java-1.{{ java_version }}.0-openjdk"
+    java_home: "{{ java_home_fact }}"
     lib_action_become_enable: true
     lib_action_become_user: "root"
     lib_action_become_method: "sudo"
