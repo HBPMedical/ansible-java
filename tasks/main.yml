@@ -1,8 +1,8 @@
 ---
-- include: Debian.yml
+- include_tasks: Debian.yml
   when: ansible_os_family == "Debian"
 
-- include: RedHat.yml
+- include_tasks: RedHat.yml
   when: ansible_os_family == "RedHat"
 
 - name: Find path for new JAVA binary
@@ -34,7 +34,7 @@
 # Use the symbolic link to current Open JDK to avoid issues if this package is updated by the administrator
 - name: Include local facts tasks
   tags: java
-  include: "{{ openjdk_path_to_lib_role }}/silpion.lib/tasks/localfacts.yml"
+  include_tasks: "{{ openjdk_path_to_lib_role }}/silpion.lib/tasks/localfacts.yml"
   vars:
     namespace: java
     java_home: "{{ java_home_fact }}"

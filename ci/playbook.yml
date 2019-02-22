@@ -16,6 +16,6 @@
         when: travis == "false" }
 
 # Only run if not travis
-- include: tests.yml
+- include_tasks: tests.yml
   when: travis == "false"
 
